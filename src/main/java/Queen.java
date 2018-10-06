@@ -17,6 +17,7 @@ class Queen extends ChessPiece
 
     public ChessPiece copy()
     {
+        //This makes sure we get the right sublcass when copying the abstract class reference.
         Queen q = new Queen(this);
         return q;
     }
