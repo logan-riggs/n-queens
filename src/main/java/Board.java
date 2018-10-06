@@ -6,6 +6,11 @@ import java.util.HashMap;
 
 class Board
 {
+    
+    private ArrayList<ChessPiece> pieces;
+    private int sizeX;
+    private int sizeY;
+    
     public Board(int height, int width)
     {
         this.sizeX = width;
@@ -26,6 +31,7 @@ class Board
             this.pieces.add(myPiece);
         }
     }
+    
     public void printBoard()
     {
         System.out.println("Board:");
@@ -111,148 +117,4 @@ class Board
 
         return true;
     }
-
-    private ArrayList<ChessPiece> pieces;
-    private int sizeX;
-    private int sizeY;
-}
-
-class SquareBoard extends Board
-{
-    public SquareBoard(int size)
-    {
-        super(size, size);
-    }
-
-}
-
-class ChessBoard extends SquareBoard
-{
-    public ChessBoard()
-    {
-        super(8);
-    }
-
-}
-
-class Location
-{
-    public Location(int x, int y)
-    {
-        this.posX = x;
-        this.posY = y;
-    }
-
-    public int getX()
-    {
-        return posX;
-    }
-
-    public int getY()
-    {
-        return posY;
-    }
-
-    @Override
-    public boolean equals(Object other)
-    {
-
-        if (this == other)
-        {
-            return true;
-        }
-
-        if (other == null || getClass() != other.getClass())
-        {
-            return false;
-        }
-
-
-        Location otherLocation = (Location) other;
-
-        return posX == otherLocation.posX && posY == otherLocation.posY;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.posX;
-        hash = 53 * hash + this.posY;
-        return hash;
-    }
-
-    private int posX;
-    private int posY;
-
-}
-
-abstract class ChessPiece
-{
-    public ChessPiece()
-    {
-        this.position = new Location(0,0);
-    }
-    public ChessPiece(int x, int y)
-    {
-        this.position = new Location(x, y);
-    }
-    public ChessPiece(ChessPiece other)
-    {
-        this.position = new Location(other.getPosition().getX(), other.getPosition().getY());
-    }
-    public abstract ChessPiece copy();
-    public Location getPosition()
-    {
-        return position;
-    }
-    public String getSymbol()
-    {
-        return "?";
-    }
-
-    public boolean canAttack(ChessPiece otherPiece)
-    {
-        return false;
-    }
-
-    protected Location position;
-}
-class Queen extends ChessPiece
-{
-    public Queen(int x, int y)
-    {
-        super(x, y);
-    }
-    public Queen(ChessPiece other)
-    {
-        this.position = new Location(other.getPosition().getX(), other.getPosition().getY());
-    }
-    public String getSymbol()
-    {
-        return "Q";
-    }
-    public ChessPiece copy()
-    {
-        Queen q = new Queen(this);
-        return q;
-    }
-    public boolean canAttack(ChessPiece otherPiece)
-    {
-        //Rows and columns.
-        if (this.position.getX() == otherPiece.getPosition().getX() ||
-            this.position.getY() == otherPiece.getPosition().getY())
-        {
-            return true;
-        }
-        
-        //Diagonals.
-        if (Math.abs(this.position.getX() - otherPiece.getPosition().getX()) ==
-            Math.abs(this.position.getY() - otherPiece.getPosition().getY()))
-        {
-            return true;
-        }
-
-        
-        return false;
-    }    
 }

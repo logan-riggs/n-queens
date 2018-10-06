@@ -1,6 +1,5 @@
  import java.util.ArrayList;
 
-
 class NQueens
 {
     public static void solve(Board board, int k, ArrayList<Board> solutions)
