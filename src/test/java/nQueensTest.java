@@ -48,7 +48,6 @@ public class nQueensTest {
     @Test public void testSameLinePlacement() {
         ChessBoard board = new ChessBoard();
 
-        
         board.addPiece(new Queen(0,0));
 
         Queen q2 = new Queen(2,1);
@@ -60,10 +59,9 @@ public class nQueensTest {
             board.canSafelyPlacePiece(new Queen(4,2)));
     }
 
-    @Test public void testSameLinePlacement2() {
+    @Test public void testSameLinePlacementOtherDirection() {
         ChessBoard board = new ChessBoard();
 
-        
         board.addPiece(new Queen(0,0));
 
         Queen q2 = new Queen(1,2);
@@ -75,10 +73,9 @@ public class nQueensTest {
             board.canSafelyPlacePiece(new Queen(2,4)));
     }
 
-    @Test public void testSameLinePlacementExtraPieces() {
+    @Test public void testSameLinePlacementExtraPiecesSafe() {
         ChessBoard board = new ChessBoard();
 
-        
         board.addPiece(new Queen(0,0));
 
         //Does affect the three piece limit.
@@ -90,14 +87,11 @@ public class nQueensTest {
         Queen q2 = new Queen(1,2);
         assertFalse("can place queen somewhere safe",
             board.canSafelyPlacePiece(q2));
-  
-  
+
     }
 
-    @Test public void testSameLinePlacementExtraPieces2() {
+    @Test public void testSameLinePlacementExtraPiecesNotSafe() {
         ChessBoard board = new ChessBoard();
-
-        
         board.addPiece(new Queen(0,0));
 
         //Doesn't affect the three piece limit.
